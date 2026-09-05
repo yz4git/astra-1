@@ -7,6 +7,7 @@ const showBootError=error=>{
  if(message)message.textContent='ゲームの初期化に失敗しました。タブを閉じずに、もう一度開くを押してください。';
 };
 
-import('./runtime-tune.js')
- .then(()=>import('./main.js'))
- .catch(showBootError);
+Promise.all([
+ import('./runtime-tune.js'),
+ import('./gameplay-polish.js')
+]).then(()=>import('./main.js')).catch(showBootError);
