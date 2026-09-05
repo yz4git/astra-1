@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,maximum-scale=1">
+ <meta name="theme-color" content="#262538"><meta name="apple-mobile-web-app-capable" content="yes">
+ <meta name="description" content="編集できる3Dアバターで60秒のコメディアクション。見どころが15秒のショートムービーに。">
+ <title>TAKE 60 — 60秒コメディスタジオ</title>
+ <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23262538'/%3E%3Ctext x='32' y='45' font-family='sans-serif' font-size='38' font-weight='900' text-anchor='middle' fill='%23d6f45d'%3E60%3C/text%3E%3C/svg%3E">
+ <link rel="stylesheet" href="./style.css">
+</head>
+<body data-mode="menu" data-stage="delivery">
+ <canvas id="stage" aria-label="3Dコメディアクションのゲーム画面"></canvas>
+ <header class="topbar">
+  <button id="home" class="brand" aria-label="タイトルへ"><span class="brand-icon">60</span><span>TAKE 60<small>COMEDY STUDIO</small></span></button>
+  <div class="top-actions"><button id="sound" class="icon-button" aria-label="音を消す" title="サウンド">♪</button><button id="edit-avatar" class="pill-button menu-only">キャストをつくる <span>↗</span></button><button id="pause" class="icon-button play-only" aria-label="一時停止">Ⅱ</button></div>
+ </header>
+
+ <main id="menu" class="screen">
+  <div class="menu-intro"><span class="eyebrow"><i></i> 60秒プレイ → 15秒ムービー</span><h1>TAKE<span>60<span class="title-dot">.</span></span></h1><p>失敗するほど、名シーン。</p><div class="cast-note"><span class="cast-line"></span><span>主演 <strong id="cast-name">モモ</strong></span></div></div>
+  <div class="menu-bottom"><div class="section-label"><span>今日の撮影、どこにする？</span><span class="small-label">3 SCENES / 1 STAR</span></div><div id="stage-picker" class="stage-picker" role="group" aria-label="ゲームを選ぶ"></div><div class="start-row"><div class="scene-brief"><strong id="scene-goal"></strong><span id="scene-tip"></span></div><button id="start" class="start-button"><span class="play-triangle">▶</span><span>60秒、アクション！<small>ひどい目にあっても、大丈夫。</small></span></button></div><div class="menu-footer"><span>移動 ＋ ジャンプ ＋ アクション</span><div><button id="open-last" class="text-button" hidden>前のムービー</button><button id="import-menu" class="text-button">リプレイを開く</button></div></div></div>
+ </main>
+
+ <section id="editor" class="screen" hidden aria-label="キャラクター編集">
+  <div class="editor-heading"><span class="eyebrow">CASTING ROOM</span><h2>主役は、あなた。</h2><p>キャラをなぞると回転できます。</p></div>
+  <div class="editor-panel"><div class="editor-panel-head"><h3>キャストをつくる</h3><button id="random-avatar" class="small-button">おまかせ ⤨</button></div>
+   <label class="name-field">なまえ<input id="avatar-name" maxlength="16" autocomplete="off" value="モモ"></label>
+   <div class="edit-group"><span>肌の色</span><div id="skin-options" class="swatches" role="group" aria-label="肌の色"></div></div>
+   <div class="edit-group"><span>服の色</span><div id="shirt-options" class="swatches" role="group" aria-label="服の色"></div></div>
+   <div class="edit-group"><span>ヘアスタイル</span><div id="hair-options" class="option-grid" role="group" aria-label="髪型"></div></div>
+   <div class="edit-group"><span>髪の色</span><div id="hair-color-options" class="swatches" role="group" aria-label="髪の色"></div></div>
+   <div class="edit-group"><span>目</span><div id="eye-options" class="option-grid" role="group" aria-label="目の形"></div></div>
+   <div class="edit-row"><label class="check-label"><input id="glasses" type="checkbox"> めがね</label><button id="expression" class="small-button">表情チェック ☺</button></div>
+   <label class="slider-label">体格<input id="body-size" type="range" min="0.8" max="1.2" step="0.05" value="1"></label><label class="slider-label">顔の大きさ<input id="head-size" type="range" min="0.85" max="1.2" step="0.05" value="1"></label>
+   <button id="save-avatar" class="primary-button">このキャストで撮影する ✓</button>
+  </div>
+ </section>
+
+ <section id="game-ui" class="screen" hidden aria-label="ゲーム操作">
+  <div class="score-panel"><span id="take-label">TAKE 01</span><strong id="score">0</strong><small id="combo">いい画を、撮ろう。</small></div>
+  <div class="clock"><span id="time-left">60</span><small>SECONDS</small><div class="clock-track"><i id="time-bar"></i></div></div>
+  <div class="mission-pill" id="mission"></div><div id="countdown" class="countdown" aria-live="polite"></div>
+  <div class="touch-controls"><div id="joystick" class="joystick" role="button" tabindex="0" aria-label="移動用スティック。キーボードでは矢印キーまたはWASD"><span class="pad-cross">＋</span><div id="stick" class="stick"></div><span class="control-label">MOVE</span></div><div class="action-controls"><button id="jump" class="jump-button"><span>↑</span>ジャンプ<small>SPACE</small></button><button id="action" class="action-button"><span>✦</span><strong id="action-label">ダッシュ</strong><small>X / ENTER</small></button></div></div>
+  <div id="game-tip" class="game-tip"></div>
+ </section>
+
+ <section id="replay-ui" class="screen" hidden aria-label="15秒ムービーの再生と保存">
+  <div class="film-top"><div><span class="film-eyebrow">THE DIRECTOR’S CUT</span><h2 id="movie-title"></h2></div><div class="movie-score"><span id="movie-stars">★★★</span><strong id="movie-score">0</strong></div></div>
+  <div id="cut-tag" class="cut-tag">SCENE 01 / 05</div><div id="movie-caption" class="movie-caption"></div><div id="freeze-tag" class="freeze-tag" hidden>…はい、カット。</div>
+  <div class="replay-bottom"><div class="replay-scrub"><button id="replay-toggle" class="replay-play" aria-label="一時停止">Ⅱ</button><input id="replay-progress" type="range" min="0" max="15" step="0.01" value="0" aria-label="リプレイの再生位置"><span id="replay-time">0:00 / 0:15</span></div><div id="clip-timeline" class="clip-timeline"></div><div class="replay-toolbar"><div class="edit-styles" role="group" aria-label="編集スタイル"><button data-style="comic" class="active">コミック</button><button data-style="cinema">シネマ</button><button data-style="chaos">カオス</button></div><div class="export-actions"><button id="save-replay" class="small-button">リプレイ保存 ↓</button><button id="save-video" class="small-button">動画にする ↓</button><button id="shoot-again" class="primary-button">もう1テイク ↻</button></div></div><p class="replay-note" id="replay-note">リプレイはファイルに保存して、このゲームでいつでも再生できます。</p></div>
+ </section>
+
+ <div id="notice" class="notice" role="status" aria-live="polite"></div>
+ <div id="cutting" class="cutting" hidden><span>THAT’S A WRAP!</span><strong>CUT!</strong><p>あなたの60秒を、15秒の名シーンに。</p></div>
+ <div id="modal" class="modal-backdrop" hidden><div class="modal" role="dialog" aria-modal="true" aria-labelledby="pause-title"><span class="eyebrow">HOLD THAT POSE.</span><h2 id="pause-title">ちょっと、ひと息。</h2><p>撮影を一時停止しています。</p><button id="resume" class="primary-button">撮影をつづける ▶</button><button id="quit" class="text-button">タイトルへ戻る</button></div></div>
+ <div id="recording-status" class="recording-status" hidden><i></i><span>動画を作成中 0 / 15秒</span><button id="cancel-video">キャンセル</button></div>
+ <div id="fatal" class="fatal" hidden role="alert"><strong>3D画面を開けませんでした。</strong><p>Safariのタブを減らして、このページを開き直してください。</p><button onclick="location.reload()">もう一度開く</button></div>
+ <input id="replay-file" type="file" accept=".json,.take60,application/json" hidden>
+ <noscript><div class="fatal">このゲームを遊ぶにはJavaScriptを有効にしてください。</div></noscript>
+ <script type="module" src="./main.js"></script>
+</body>
+</html>
