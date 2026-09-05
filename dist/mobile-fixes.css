@@ -1,0 +1,73 @@
+:root{--app-width:100vw;--app-height:100dvh}
+html,body{width:100%;height:var(--app-height);min-height:var(--app-height);max-height:var(--app-height)}
+body{position:fixed;inset:0;overflow:hidden}
+#stage,.screen,.cutting,.modal-backdrop,.fatal{width:var(--app-width);height:var(--app-height);max-height:var(--app-height)}
+
+@media(max-height:520px) and (min-aspect-ratio:1/1){
+ .menu-bottom{bottom:calc(12px + var(--safe-bottom))}
+ .menu-footer{display:none}
+ .section-label{margin-bottom:5px}
+ .stage-picker{gap:7px}
+ .stage-card{min-height:49px;padding:7px 10px}
+ .stage-card strong{font-size:12px}
+ .stage-card small{font-size:7px;margin-top:3px}
+ .scene-number{font-size:20px}
+ .start-row{margin-top:7px;gap:10px}
+ .start-button{min-width:230px;padding:8px 14px;font-size:14px;gap:10px;box-shadow:0 3px 0 #141225}
+ .start-button small{font-size:8px}
+ .scene-brief strong{font-size:11px}
+ .joystick{width:96px;height:96px;bottom:calc(18px + var(--safe-bottom))}
+ .stick{width:46px;height:46px}
+ .pad-cross{font-size:62px}
+ .control-label{display:none}
+ .action-controls{right:max(20px,calc(env(safe-area-inset-right) + 8px));bottom:calc(18px + var(--safe-bottom));gap:10px}
+ .action-button{width:80px;height:80px}
+ .action-button>span{font-size:25px}
+ .action-button strong{font-size:10px}
+ .jump-button{width:58px;height:58px;margin-bottom:-4px;font-size:9px}
+ .jump-button>span{font-size:20px}
+ .game-tip{display:none}
+ .mission-pill{top:calc(72px + var(--safe-top));font-size:10px;padding:6px 11px}
+ .score-panel{left:max(18px,env(safe-area-inset-left));top:calc(10px + var(--safe-top));padding:8px 12px;min-width:112px}
+ .score-panel strong{font-size:25px}
+ .clock{top:calc(9px + var(--safe-top));padding:7px 12px 9px}
+ .clock>span{font-size:27px}
+ .replay-bottom{padding-bottom:calc(7px + var(--safe-bottom))}
+ .replay-toolbar{gap:6px}
+ .export-actions{gap:5px}
+ .export-actions .small-button{padding:6px 7px}
+ .export-actions .primary-button{padding:7px 9px}
+}
+
+@media(max-height:430px) and (min-aspect-ratio:1/1){
+ .topbar{top:calc(8px + var(--safe-top))}
+ .menu-intro{top:21%}
+ .menu-intro h1{font-size:50px;margin:8px 0 9px}
+ .menu-intro p{font-size:12px}
+ .menu-bottom{bottom:calc(8px + var(--safe-bottom))}
+ .section-label{display:none}
+ .stage-card{min-height:44px;padding:6px 9px}
+ .start-row{margin-top:6px}
+ .scene-brief{display:none}
+ .start-button{margin-left:auto;min-width:215px;padding:7px 12px;font-size:13px}
+ .start-button small{display:none}
+ .joystick{bottom:calc(14px + var(--safe-bottom));width:90px;height:90px}
+ .action-controls{bottom:calc(14px + var(--safe-bottom))}
+ .action-button{width:74px;height:74px}
+ .jump-button{width:54px;height:54px}
+ .movie-caption{bottom:calc(126px + var(--safe-bottom))}
+ .clip-chip{min-height:22px;padding:4px 6px}
+ .edit-styles button{padding:4px 6px}
+}
+
+@media(max-aspect-ratio:4/5) and (max-height:760px){
+ .menu-intro{top:calc(82px + var(--safe-top))}
+ .menu-intro h1{font-size:56px;margin:10px 0 12px}
+ .cast-note{display:none}
+ .menu-bottom{bottom:calc(10px + var(--safe-bottom))}
+ .stage-card{min-height:84px;padding:10px 8px}
+ .start-row{margin-top:10px}
+ .start-button{margin-top:8px;padding:12px;font-size:17px}
+ .menu-footer{display:none}
+ .editor-panel{height:50%;padding-bottom:calc(18px + var(--safe-bottom))}
+}

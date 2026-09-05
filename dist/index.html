@@ -6,7 +6,17 @@
  <meta name="description" content="編集できる3Dアバターで60秒のコメディアクション。見どころが15秒のショートムービーに。">
  <title>TAKE 60 — 60秒コメディスタジオ</title>
  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23262538'/%3E%3Ctext x='32' y='45' font-family='sans-serif' font-size='38' font-weight='900' text-anchor='middle' fill='%23d6f45d'%3E60%3C/text%3E%3C/svg%3E">
+ <link rel="modulepreload" href="./lib/three.module.min.js">
+ <link rel="modulepreload" href="./visuals.js">
+ <link rel="modulepreload" href="./config.js">
+ <link rel="modulepreload" href="./core.js">
+ <link rel="modulepreload" href="./input.js">
+ <link rel="modulepreload" href="./audio.js">
+ <link rel="modulepreload" href="./replay.js">
+ <link rel="modulepreload" href="./runtime-tune.js">
+ <link rel="modulepreload" href="./main.js">
  <link rel="stylesheet" href="./style.css">
+ <link rel="stylesheet" href="./mobile-fixes.css">
 </head>
 <body data-mode="menu" data-stage="delivery">
  <canvas id="stage" aria-label="3Dコメディアクションのゲーム画面"></canvas>
@@ -56,6 +66,6 @@
  <div id="fatal" class="fatal" hidden role="alert"><strong>3D画面を開けませんでした。</strong><p>Safariのタブを減らして、このページを開き直してください。</p><button onclick="location.reload()">もう一度開く</button></div>
  <input id="replay-file" type="file" accept=".json,.take60,application/json" hidden>
  <noscript><div class="fatal">このゲームを遊ぶにはJavaScriptを有効にしてください。</div></noscript>
- <script type="module" src="./main.js"></script>
+ <script type="module" src="./bootstrap.js"></script>
 </body>
 </html>
